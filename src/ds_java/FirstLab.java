@@ -13,13 +13,19 @@ public class FirstLab {
 	public static void main(String[] args) throws IOException {
 		
 		char go;
-		Onelink list;		
+		Onelink list;
+		int local;
+		int result;
+		Scanner br = new Scanner(System.in);
 		do{
 			System.out.println("输入数字，按下‘#’结束");
 			list = CreatList();
-			System.out.println("是否继续 : Y or N?");
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			go = (char) br.read();
+			System.out.println("请输入相邻的位数");
+			local = (int)br.nextInt();
+			result = Adjmax(list, local);
+			System.out.println("相邻最大的编号是"+result);
+			System.out.println("是否继续 : Y or N?");			
+			go = (char) br.nextInt();
 		}while(go == 'Y' );
 		
 		}
@@ -39,6 +45,10 @@ public class FirstLab {
 		}
 		list.output();
 		return list;
+	}
+	
+	static int Adjmax(Onelink L,int k ){
+		return k;
 	}
 	
 	}
