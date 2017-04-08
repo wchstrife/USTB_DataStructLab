@@ -37,6 +37,7 @@ public class SecondLab {
 				i = lastIndex - 1;
 				
 				
+				
 			}
 		}
 	}
