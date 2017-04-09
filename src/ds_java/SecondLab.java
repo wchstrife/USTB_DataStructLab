@@ -35,11 +35,51 @@ public class SecondLab {
 				number = Double.parseDouble(input.substring(i, lastIndex));//把字符串的数字转化为double类型
 				s2.push(number);//遇到数字就进栈
 				i = lastIndex - 1;
-				
-				
-				
+				if ((int) number == number)
+					System.out.println((int) number + " ");
+				else
+					System.out.println(number + " ");
+			}else if(isOperator(c)){
+				while(!s1.isEmpty() && s1.peek() != '(' && priortyCompare(c, s1.peek()) <= 0){
+					System.out.println(s1.peek() + " ");
+					double num1 = s2.pop();
+					double num2 = s2.pop();
+					s2.push(calc(num2, num1, s1.pop()));
+				}
+				s1.push(c);
+			}else if (c == '('){
+				s1.push(c);
+			}else if (c == ')'){
+				while ((tempchar = s1.pop()) != '('){
+					System.out.println(tempchar + " ");
+					double num1 = s2.pop();
+					double num2 = s2.pop();
+					s2.push(calc(num2, num1, tempchar));
+					if(s1.isEmpty()){
+						throw new IllegalArgumentException("输入表达式有误，括号不能匹配");
+					}
+				}
+			}else if (c == ' '){
+				//忽略中间的空格
+			}else {
+				throw new IllegalArgumentException("输入的字符有误" + c + " ");
 			}
 		}
+		while (!s1.isEmpty()){
+			tempchar = s1.pop();
+			System.out.println(tempchar + " ");
+			double num1 = s2.pop();
+			double num2 = s2.pop();
+			s2.push(calc(num2, num1, tempchar));			
+		}
+		double result = s2.pop();
+		if(!s2.isEmpty())
+			throw new IllegalArgumentException("输入的表达式错误");
+		System.out.println();
+		if ((int) result == result)
+			System.out.println("the result is" + (int) result);
+		else
+			System.out.println("the result is" + result);
 	}
 	
 	/*计算结果*/
