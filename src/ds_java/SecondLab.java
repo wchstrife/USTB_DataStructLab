@@ -13,7 +13,16 @@ public class SecondLab {
 			System.out.println("中缀表达式：");
 			System.out.println(input);
 			System.out.println("后缀表达式：");
-			Reverse(input);
+			try{
+				Reverse(input);
+				}catch (NumberFormatException e){
+					System.out.println("\npinput error, not a number");
+				}catch (IllegalArgumentException e){
+					System.out.println("\ninput error:" + e.getMessage());
+				}catch (Exception e){
+					System.out.println("\ninput error, invalid expression");
+				}
+			
 			System.out.println("请再输入一个表达式，exit退出");
 			input = scanner.nextLine();
 		}
@@ -36,12 +45,12 @@ public class SecondLab {
 				s2.push(number);//遇到数字就进栈
 				i = lastIndex - 1;
 				if ((int) number == number)
-					System.out.println((int) number + " ");
+					System.out.print((int) number + " ");
 				else
-					System.out.println(number + " ");
+					System.out.print(number + " ");
 			}else if(isOperator(c)){
 				while(!s1.isEmpty() && s1.peek() != '(' && priortyCompare(c, s1.peek()) <= 0){
-					System.out.println(s1.peek() + " ");
+					System.out.print(s1.peek() + " ");
 					double num1 = s2.pop();
 					double num2 = s2.pop();
 					s2.push(calc(num2, num1, s1.pop()));
@@ -51,7 +60,7 @@ public class SecondLab {
 				s1.push(c);
 			}else if (c == ')'){
 				while ((tempchar = s1.pop()) != '('){
-					System.out.println(tempchar + " ");
+					System.out.print(tempchar + " ");
 					double num1 = s2.pop();
 					double num2 = s2.pop();
 					s2.push(calc(num2, num1, tempchar));
@@ -67,7 +76,7 @@ public class SecondLab {
 		}
 		while (!s1.isEmpty()){
 			tempchar = s1.pop();
-			System.out.println(tempchar + " ");
+			System.out.print(tempchar + " ");
 			double num1 = s2.pop();
 			double num2 = s2.pop();
 			s2.push(calc(num2, num1, tempchar));			
@@ -77,9 +86,9 @@ public class SecondLab {
 			throw new IllegalArgumentException("输入的表达式错误");
 		System.out.println();
 		if ((int) result == result)
-			System.out.println("the result is" + (int) result);
+			System.out.println("the result is " + (int) result);
 		else
-			System.out.println("the result is" + result);
+			System.out.println("the result is " + result);
 	}
 	
 	/*计算结果*/
