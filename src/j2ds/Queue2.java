@@ -1,3 +1,13 @@
+/*
+ * 实验三、链式队列的基本操作
+ * 将从键盘输入的一系列字符存储到链式队列中，当输入的字符为’0’时，执行出队操作并将出队元素打印到屏幕上；
+ * 当输入的字符为’@’时，队列中剩余所有元素依次出队并打印到屏幕上；当输入其他字符时，字符入队。
+ * 
+ * 作者：wchstrife
+ * 日期：2017.4.16
+ * */
+
+
 package j2ds;
 
 import java.util.Scanner;
@@ -43,10 +53,35 @@ public class Queue2 extends Onelink1{
 	public static void main(String[] args){
 		Queue2 test  = new Queue2();
 		Scanner scanner = new Scanner(System.in);
-		char input = scanner.next().charAt(0);
-		while(input != '#'){
-			System.out.println("1");
-			input = scanner.next().charAt(0);
+		System.out.println("请输入符号");
+		char input = scanner.next().charAt(0);	//输入字符
+		String con = "Yes";		//判断是否继续
+		while("Yes".equalsIgnoreCase(con)){
+			System.out.println("请输入符号");
+			switch(input){
+				case '0' : {//输入0出队一个
+					if(test.isEmpty()){
+						System.out.println("错误！队列为空！");break;
+					}
+					System.out.println( test.dequeue() );break;
+				}
+				case '@' :{//输入@输出全部，然后判断是否继续
+					if(test.isEmpty()){
+						System.out.println("错误！队列为空！");break;
+					}
+					while(!test.isEmpty()){
+						System.out.print(test.dequeue() + "-");						
+					}
+					System.out.println();
+					System.out.println("是否继续Yes or No");
+					con = scanner.next();break;
+					
+				}
+				default :{//其他的字符进队
+					test.enqueue(input);
+				}
+			}						
+			input = scanner.next().charAt(0);			
 		}
 	}
 }
