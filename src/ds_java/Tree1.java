@@ -4,6 +4,8 @@
  * */
 package ds_java;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -83,11 +85,27 @@ public class Tree1 {
 		
 		
 		String flag = "Yes";
+		String ss[] = null;
+		String isFile;
+		String temp;
 		
 		while(flag.equalsIgnoreCase("Yes")){
-			System.out.println("请输入句子");
 			Scanner scanner = new Scanner(System.in); 	//分隔输入句子的单词
-			String[] ss = scanner.nextLine().split(" ");
+			System.out.println("是否从文件输入?yes");
+			isFile = scanner.next();
+			if(isFile.equalsIgnoreCase("yes")){
+				try{
+					BufferedReader br = new BufferedReader(new FileReader("F:\\11.txt"));
+					while( (temp = br.readLine()) != null){	
+						ss = temp.split(" ");
+					}					
+					}catch(Exception e){
+						System.out.println("读取错误");
+					}
+			}else{
+			System.out.println("请输入句子");			
+			ss = scanner.nextLine().split(" ");
+			}
 			Tree1 tree = new Tree1();		
 			for(int i=0; i<ss.length; i++){
 				tree.buildTree(tree.root, ss[i]);

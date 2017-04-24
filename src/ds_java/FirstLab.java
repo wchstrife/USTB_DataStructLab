@@ -19,8 +19,7 @@ public class FirstLab {
 		int result;
 		Scanner br = new Scanner(System.in);
 		try{
-		do{
-			
+		do{			
 			System.out.println("输入数字，按下‘0’结束");
 			FirstLab mylab = new FirstLab();
 			list = mylab.CreatList();
@@ -33,6 +32,7 @@ public class FirstLab {
 		}catch(Exception e){
 			System.out.println("输入参数有误");
 		}
+		
 		}
 	
 	 Onelink CreatList(){

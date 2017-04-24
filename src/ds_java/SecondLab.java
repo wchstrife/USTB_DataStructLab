@@ -2,30 +2,51 @@ package ds_java;
 
 import java.util.Scanner;
 import java.util.Stack;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class SecondLab {
+			
 	public static void main(String[] args){
-		System.out.println("输入一个中缀表达式，如果需要退出请输入exit");
+		String input = "";	
+		String output;
 		Scanner scanner = new Scanner(System.in);
-		String input = "";
-		input = scanner.nextLine();
-		while(input.length()!= 0 && !"exit".equalsIgnoreCase(input)){
-			System.out.println("中缀表达式：");
-			System.out.println(input);
-			System.out.println("后缀表达式：");
+		String flag;
+		String temp;
+		System.out.println("是否需要从文件输入");
+		flag= scanner.nextLine();
+		if(flag.equals("Yes")){
 			try{
-				Reverse(input);
+			BufferedReader br = new BufferedReader(new FileReader("F:\\11.txt"));
+			while( (temp = br.readLine()) != null){
+				input += temp;
+			}
+			}catch(Exception e){
+				System.out.println("读取错误");
+			}
+		}else{
+			System.out.println("输入一个中缀表达式，如果需要退出请输入exit");
+			input = scanner.nextLine();
+		}					
+		while(input.length()!= 0 && !"exit".equalsIgnoreCase(input)){
+			System.out.print("中缀表达式：");
+			System.out.println(input);			
+			try{
+				output = Reverse(input);
 				}catch (NumberFormatException e){
 					System.out.println("\npinput error, not a number");
-					return;
+					return ;
 				}catch (IllegalArgumentException e){
 					System.out.println("\ninput error:" + e.getMessage());
-					return;
+					return ;
 				}catch (Exception e){
 					System.out.println("\ninput error, invalid expression");
-					return;
+					return ;
 				}
-			
+			System.out.print("后缀表达式：");
+			System.out.println(output);
 			System.out.println("请再输入一个表达式，exit退出");
 			input = scanner.nextLine();
 		}
@@ -33,7 +54,10 @@ public class SecondLab {
 	}
 	
 	/*将中缀表达式改写成后缀表达式*/
-	private static void Reverse(String input) throws IllegalArgumentException, NumberFormatException{
+	private static String Reverse(String input) throws IllegalArgumentException, NumberFormatException{
+		
+		String ans = "";
+		
 		int len = input.length();
 		char c,tempchar;
 		Stack<Character> s1 = new Stack<Character>();//s1存放操作码
@@ -47,13 +71,22 @@ public class SecondLab {
 				number = Double.parseDouble(input.substring(i, lastIndex));//把字符串的数字转化为double类型
 				s2.push(number);//遇到数字就进栈
 				i = lastIndex - 1;
-				if ((int) number == number)
-					System.out.print((int) number + " ");
-				else
-					System.out.print(number + " ");
+				if ((int) number == number){
+					ans += (int)number;
+					ans += " ";
+					//System.out.print((int) number + " ");
+				}
+				else{
+					ans += number;
+					ans += " ";
+					
+					//System.out.print(number + " ");
+				}
 			}else if(isOperator(c)){
 				while(!s1.isEmpty() && s1.peek() != '(' && priortyCompare(c, s1.peek()) <= 0){
-					System.out.print(s1.peek() + " ");
+					ans += s1.peek();
+					ans += " ";
+					//System.out.print(s1.peek() + " ");
 					double num1 = s2.pop();
 					double num2 = s2.pop();
 					s2.push(calc(num2, num1, s1.pop()));
@@ -63,7 +96,9 @@ public class SecondLab {
 				s1.push(c);
 			}else if (c == ')'){
 				while ((tempchar = s1.pop()) != '('){
-					System.out.print(tempchar + " ");
+					ans += tempchar;
+					ans += " ";
+					//System.out.print(tempchar + " ");
 					double num1 = s2.pop();
 					double num2 = s2.pop();
 					s2.push(calc(num2, num1, tempchar));
@@ -79,7 +114,9 @@ public class SecondLab {
 		}
 		while (!s1.isEmpty()){
 			tempchar = s1.pop();
-			System.out.print(tempchar + " ");
+			ans += tempchar;
+			ans += " ";
+			//System.out.print(tempchar + " ");
 			double num1 = s2.pop();
 			double num2 = s2.pop();
 			s2.push(calc(num2, num1, tempchar));			
@@ -92,6 +129,8 @@ public class SecondLab {
 			System.out.println("the result is " + (int) result);
 		else
 			System.out.println("the result is " + result);
+		
+		return ans;
 	}
 	
 	/*计算结果*/
