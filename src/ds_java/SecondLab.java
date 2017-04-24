@@ -17,13 +17,13 @@ public class SecondLab {
 				Reverse(input);
 				}catch (NumberFormatException e){
 					System.out.println("\npinput error, not a number");
-					
+					return;
 				}catch (IllegalArgumentException e){
 					System.out.println("\ninput error:" + e.getMessage());
-					
+					return;
 				}catch (Exception e){
 					System.out.println("\ninput error, invalid expression");
-					
+					return;
 				}
 			
 			System.out.println("请再输入一个表达式，exit退出");

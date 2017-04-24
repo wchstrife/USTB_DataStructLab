@@ -46,7 +46,7 @@ public class Tree1 {
 				System.out.print(p.data+" ");
 				p = p.right;
 			}
-			System.out.println();
+			
 		}
 	}
 	
@@ -80,14 +80,23 @@ public class Tree1 {
 	}
 	
 	public static void main(String[] args){	
-		System.out.print("请输入句子");
-		Scanner scanner = new Scanner(System.in); 	//分隔输入句子的单词
-		String[] ss = scanner.nextLine().split(" ");
-		Tree1 tree = new Tree1();		
-		for(int i=0; i<ss.length; i++){
-			tree.buildTree(tree.root, ss[i]);
+		
+		
+		String flag = "Yes";
+		
+		while(flag.equalsIgnoreCase("Yes")){
+			System.out.println("请输入句子");
+			Scanner scanner = new Scanner(System.in); 	//分隔输入句子的单词
+			String[] ss = scanner.nextLine().split(" ");
+			Tree1 tree = new Tree1();		
+			for(int i=0; i<ss.length; i++){
+				tree.buildTree(tree.root, ss[i]);
+			}
+			tree.inorderTraversal();
+			tree.inorderNor();
+			System.out.println("是否继续");
+			flag = scanner.next();
 		}
-		tree.inorderTraversal();
-		tree.inorderNor();
+		
 	}
 }
