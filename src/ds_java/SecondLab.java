@@ -17,10 +17,13 @@ public class SecondLab {
 				Reverse(input);
 				}catch (NumberFormatException e){
 					System.out.println("\npinput error, not a number");
+					
 				}catch (IllegalArgumentException e){
 					System.out.println("\ninput error:" + e.getMessage());
+					
 				}catch (Exception e){
 					System.out.println("\ninput error, invalid expression");
+					
 				}
 			
 			System.out.println("请再输入一个表达式，exit退出");
@@ -71,7 +74,7 @@ public class SecondLab {
 			}else if (c == ' '){
 				//忽略中间的空格
 			}else {
-				throw new IllegalArgumentException("输入的字符有误" + c + " ");
+				throw new IllegalArgumentException("输入的字符有误:" + c + " ");
 			}
 		}
 		while (!s1.isEmpty()){
@@ -140,8 +143,9 @@ public class SecondLab {
 			c = input.charAt(i);
 			//判断小数点
 			if(c == '.'){
-				if(dotIndex != -1)
+				if(dotIndex != -1){
 					throw new IllegalArgumentException("表达式错误，表达式中只可以有一个小数点");
+				}
 				else if ( i == len-1)
 					throw new IllegalArgumentException("小数点不能在最后一位");
 				else dotIndex = i;

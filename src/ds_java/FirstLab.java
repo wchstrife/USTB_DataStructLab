@@ -18,8 +18,10 @@ public class FirstLab {
 		int local;
 		int result;
 		Scanner br = new Scanner(System.in);
+		try{
 		do{
-			System.out.println("输入数字，按下‘#’结束");
+			
+			System.out.println("输入数字，按下‘0’结束");
 			FirstLab mylab = new FirstLab();
 			list = mylab.CreatList();
 			System.out.println("请输入相邻的位数");
@@ -28,7 +30,9 @@ public class FirstLab {
 			System.out.println("继续请输入：Yes");			
 			go =  br.next();
 		}while(go.equals("Yes") );
-		
+		}catch(Exception e){
+			System.out.println("输入参数有误");
+		}
 		}
 	
 	 Onelink CreatList(){
@@ -58,7 +62,8 @@ public class FirstLab {
 		int val=0;//记录最大的data
 		p1 = L.head;
 		if(p1 == null || (L.length())-1 < k ){
-			 System.out.println("输入有误");
+			 System.out.println("相邻位数超范围");
+			 return ;
 		}
 		while(p1 != null){
 			k1 = k;
