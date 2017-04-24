@@ -6,6 +6,8 @@
 
 package ds_java;
 
+import java.util.Stack;
+
 public class TreeNode1 {
 	
 	public String data;

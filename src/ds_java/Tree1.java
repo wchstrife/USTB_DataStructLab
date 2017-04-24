@@ -5,6 +5,7 @@
 package ds_java;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 import ds_java.TreeNode1;
 
@@ -18,9 +19,33 @@ public class Tree1 {
 	
 	/*调用二叉树中序遍历算法*/
 	public void inorderTraversal(){
-		System.out.print("中序遍历结果：");
+		System.out.print("递归中序遍历结果：");
 		if(root != null){
 			root.inorder(root);
+			System.out.println();
+		}
+	}
+	
+	/*非递归算法中序遍历二叉树
+	 * 1.节点p不空，节点入栈，进入左子树
+	 * 2.p为空，栈不空，栈顶出栈，进入右子树
+	 * 3.p为空，栈为空，结束
+	 * */
+	public void inorderNor(){
+		Stack s1 = new Stack();
+		TreeNode1 p = root;
+		System.out.print("非递归中序遍历结果： ");
+		
+		while(p != null || !s1.isEmpty() ){		//p非空或者栈非空
+			if(p!=null){
+				s1.push(p);
+				p = p.left;
+			}
+			else{
+				p = (TreeNode1)s1.pop();
+				System.out.print(p.data+" ");
+				p = p.right;
+			}
 			System.out.println();
 		}
 	}
@@ -55,13 +80,14 @@ public class Tree1 {
 	}
 	
 	public static void main(String[] args){	
+		System.out.print("请输入句子");
 		Scanner scanner = new Scanner(System.in); 	//分隔输入句子的单词
 		String[] ss = scanner.nextLine().split(" ");
-		Tree1 tree = new Tree1();
-		System.out.print("请输入句子");
+		Tree1 tree = new Tree1();		
 		for(int i=0; i<ss.length; i++){
 			tree.buildTree(tree.root, ss[i]);
 		}
 		tree.inorderTraversal();
+		tree.inorderNor();
 	}
 }
