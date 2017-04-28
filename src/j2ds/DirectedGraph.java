@@ -87,7 +87,11 @@ public class DirectedGraph {
 				if(--e.endVertex.inDegree == 0)
 					queue.offer(e.endVertex);
 		}
+		System.out.println();
 		if(count != directedGraph.size())
-			throw new Exception("Graph has circle");		
+			throw new Exception("Graph has circle");
+		else {
+			System.out.println("Graph doesn't have circle");
+		}
 	}
 }
