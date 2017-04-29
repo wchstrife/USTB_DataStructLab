@@ -10,14 +10,7 @@ import java.io.IOException;
 
 public final class FileUtil {
 	
-	/*
-	 * 读取文件并按行输出
-	 * @param 	filePath 文件读入的路径
-	 * @param 	spec 允许解析的最大行数，spec==null 的时候全部解析
-	 * @return 	按行输出
-	 * @author 	wchstrife
-	 * @since 	2017-4-25
-	 * */
+	
 	public static String read(final String filePath, final Integer spec){
 		File file = new File(filePath);
 		//当文件不存在或者不可读的时候
