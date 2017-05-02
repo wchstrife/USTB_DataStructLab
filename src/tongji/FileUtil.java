@@ -1,8 +1,15 @@
 package tongji;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 public class FileUtil {
 	
@@ -29,8 +36,41 @@ public class FileUtil {
 		}
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			if(br != null){
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(fb != null){
+				try {
+					fb.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return string.toString();
 	}
+	
+	public static void write(String content){
+		try {
+			FileWriter wr = new FileWriter("F:/ans.txt", true);
+			wr.write(content);
+			wr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("IOException...");
+			e.printStackTrace();
+		}
 		
+		/*
+		 * 1.清空文件
+		 * 2.读取之前的文件
+		 * */
+	}
 }
