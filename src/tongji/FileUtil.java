@@ -57,6 +57,7 @@ public class FileUtil {
 		return string.toString();
 	}
 	
+	//向文件中写入数据
 	public static void write(String content){
 		try {
 			FileWriter wr = new FileWriter("F:/ans.txt", true);
@@ -66,11 +67,20 @@ public class FileUtil {
 			// TODO Auto-generated catch block
 			System.out.println("IOException...");
 			e.printStackTrace();
-		}
-		
-		/*
-		 * 1.清空文件
-		 * 2.读取之前的文件
-		 * */
+		}				
 	}
+	
+	//清空文件
+	public static void clear(){
+		try{FileWriter wr = new FileWriter("F:/ans.txt",false);
+		wr.write("");
+		}catch(IOException e){
+			System.out.println("Clear Error");
+			e.printStackTrace();
+		}
+	}
+	/*
+	 * 1.清空文件
+	 * 2.读取之前的文件
+	 * */
 }

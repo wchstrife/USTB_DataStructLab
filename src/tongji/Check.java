@@ -1,13 +1,16 @@
 package tongji;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 public class Check {
 	
@@ -43,14 +46,18 @@ public class Check {
 					}
 				}
 			}); 
-			System.out.println("排序后");
+			System.out.println("单词出现频率最高统计");
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");//设置日期格式
+			System.out.println("----------" + df.format(new Date()) + "----------");// new Date()为获取当前系统时间
+			FileUtil.write("----------" + df.format(new Date()) + "----------" + " ");
+			FileUtil.write("\r\n");
 			try{
 			for(int i=0; i<10; i++){
 				String word = List_Data.get(i).getKey();
 				String fre = List_Data.get(i).getValue().toString();
 				System.out.println(word + ":" + fre);
 				FileUtil.write(word + ":");
-				FileUtil.write(fre + "\r\n");
+				FileUtil.write(fre + "\r\n" + " ");
 			}
 			}catch(IndexOutOfBoundsException e){
 				System.out.println("排序时传入集合为空,程序结束");
@@ -59,7 +66,32 @@ public class Check {
 		}
 		
 		public static void main(String[] args){
-			search( FileUtil.read("F:\\11.txt") );
-			sortMap();
+			
+			/*读取上次保存的数据*/
+			String str = FileUtil.read("F:\\ans.txt");
+			String[] str1 = str.split(" ");
+			for(int i=0; i<str1.length; i++){				
+				System.out.println(str1[i]);
+			}
+			
+			FileUtil.clear();//清空原文件
+			search( FileUtil.read("F:\\11.txt") );//将所有的数据进行统计
+			sortMap();//排序取前十个频率最高的单词
+			
+			Scanner in = new Scanner(System.in);
+			
+			boolean flag = true;
+			
+			String string = " ";
+			
+			while( flag && in.hasNext() ){
+				string = in.next();
+				switch( string ){
+				case "clear" : System.out.println("清除");break;
+				case "search" : System.out.println("查找对应单词");break;
+				case "exit" : System.out.println("程序退出");flag = false;break;
+				default: System.out.println("输入参数有问题");
+				}
+			}
 		}
 }
