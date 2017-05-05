@@ -29,7 +29,7 @@ public final class FileUtil {
 			String str = null;
 			int index = 0;
 			while ( (spec == null || index++ <spec) &&  (str = br.readLine()) != null ){
-				sb.append(str + "/n");
+				sb.append(str + "\n");
 //System.out.println(str);
 			}
 		}catch(IOException e){
@@ -38,7 +38,8 @@ public final class FileUtil {
 			closeQuietly(br);
 			closeQuietly(fb);
 		}
-		return sb.toString();
+//System.out.println(sb.toString());
+		return sb.toString();		
 	}
 
 	/*
