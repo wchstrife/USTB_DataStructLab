@@ -1,8 +1,9 @@
-package algorithm_design;
+package algorithm_design.lab1;
 
 import java.util.Scanner;
 
 /*
+ * https://www.cnblogs.com/acbingo/p/4504381.html
  * 分治法求幂指数取模
  */
 public class PowerAndModulo {
