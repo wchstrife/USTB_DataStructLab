@@ -46,6 +46,8 @@ public class PackageItem {
 			System.out.println();
 		}
 		
+		System.out.println("背包重量为：" + packageWeight + " 时，最优解为:" + arr[itemNumber][packageWeight]);
+		
 	}
 	
 	
