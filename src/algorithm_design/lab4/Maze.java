@@ -1,5 +1,12 @@
 package algorithm_design.lab4;
 
+import java.nio.file.Path;
+
+/**
+ * https://wenku.baidu.com/view/106ae65184868762caaed5e8.html
+ * @author ASUS
+ *
+ */
 public class Maze {
 	
 	public int[][] map;
@@ -34,6 +41,40 @@ public class Maze {
 			}
 		}
 		
+		/**
+		 * 记录解的路径
+		 */
+		int[][] path = new int[n][m];
+		int tempX=n-1,tempY=m-1;
+		while (tempX>=0 && tempY>=0) {
+			if (tempX == 0 && tempY == 0) {
+				map[tempX][tempY] = 1;
+				path[tempX][tempY] = 1;
+				break;
+			}else if (tempX == 0) {
+				tempY = tempY - 1;
+				map[tempX][tempY] = 1;
+				path[tempX][tempY] = 1;
+			}else if (tempY == 0) {
+				tempX = tempX - 1;
+				map[tempX][tempY] = 1;
+				path[tempX][tempY] = 1;
+			}else if (dp[tempX-1][tempY] == dp[tempX][tempY] - map[tempX][tempY]){
+				tempX = tempX - 1;
+				map[tempX][tempY] = 1;
+				path[tempX][tempY] = 1;
+			}else if (dp[tempX][tempY-1] == dp[tempX][tempY] - map[tempX][tempY]) {
+				tempY = tempY - 1;
+				map[tempX][tempY] = 1;
+				path[tempX][tempY] = 1;
+			}else {
+				System.out.println("error:" + tempX + tempY);
+			}
+			
+		}
+		
+		
+		
 		
 		
 		/*输出权值数组*/
@@ -49,6 +90,15 @@ public class Maze {
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<m; j++) {
 				System.out.print(map[i][j] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		
+		/*输出路径数组*/
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				System.out.print(path[i][j] + " ");
 			}
 			System.out.println();
 		}
