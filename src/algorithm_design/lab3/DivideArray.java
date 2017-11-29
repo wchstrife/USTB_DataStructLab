@@ -1,7 +1,11 @@
 package algorithm_design.lab3;
 
 import java.util.Scanner;
-
+/**
+ * http://blog.csdn.net/htq__/article/details/50925205
+ * @author ASUS
+ *
+ */
 public class DivideArray {
 
 	public static void main(String[] args) {
