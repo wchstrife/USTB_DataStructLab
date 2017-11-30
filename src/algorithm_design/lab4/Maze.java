@@ -48,24 +48,19 @@ public class Maze {
 		int tempX=n-1,tempY=m-1;
 		while (tempX>=0 && tempY>=0) {
 			if (tempX == 0 && tempY == 0) {
-				map[tempX][tempY] = 1;
 				path[tempX][tempY] = 1;
 				break;
 			}else if (tempX == 0) {
 				tempY = tempY - 1;
-				map[tempX][tempY] = 1;
 				path[tempX][tempY] = 1;
 			}else if (tempY == 0) {
 				tempX = tempX - 1;
-				map[tempX][tempY] = 1;
 				path[tempX][tempY] = 1;
 			}else if (dp[tempX-1][tempY] == dp[tempX][tempY] - map[tempX][tempY]){
 				tempX = tempX - 1;
-				map[tempX][tempY] = 1;
 				path[tempX][tempY] = 1;
 			}else if (dp[tempX][tempY-1] == dp[tempX][tempY] - map[tempX][tempY]) {
 				tempY = tempY - 1;
-				map[tempX][tempY] = 1;
 				path[tempX][tempY] = 1;
 			}else {
 				System.out.println("error:" + tempX + tempY);
@@ -73,11 +68,25 @@ public class Maze {
 			
 		}
 		
+		path[n-1][m-1] = 1;
 		
-		
+		/**
+		 * 输出第一次的路径
+		 */
+		System.out.println("遍历路径");
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if (path[i][j] == 1) {
+					map[i][j] = 0;
+					System.out.print(i + "," + j + " ");
+				}			
+			}
+		}
+		System.out.println();
 		
 		
 		/*输出权值数组*/
+		System.out.println("动态规划的数组：");
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<m; j++) {
 				System.out.print(dp[i][j] + " ");
@@ -115,7 +124,9 @@ public class Maze {
 		maze.map = arr;
 		
 		int x = maze.upToDown(5, 5);
+		System.out.println("++++++++++++第二次++++++++++++++++");
+		int y = maze.upToDown(5, 5);
 		
-		System.out.println(x+" ");
+		System.out.println("最终往返的最大权值："+ (x + y));
 	}
 }
